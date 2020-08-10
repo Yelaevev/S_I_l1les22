@@ -9,7 +9,7 @@ namespace Level1Space
         {
             string ans1;/// добавляем замкнутые скобки +()+
             if (N == 1) return "()";
-            if (N == 2) return "(()) ()()";
+            if (N == 2) return "()() (())";
             ans1 = BalancedParentheses(N - 1);
             int i = 1;
             ans1 = ans1.Insert(0, "()");
@@ -18,6 +18,20 @@ namespace Level1Space
                 if (ans1[i]==' ')
                 {
                     ans1 = ans1.Insert(i+1, "()");
+                    i = i + 2;// добавили два элемента , чтобы в счете вернуться на прежнее место
+                }
+
+                i++;
+            }
+
+            string ans3= BalancedParentheses(N - 1);
+            ans3 = ans3.Substring((N-1)*2+1);
+            ans3 = ans3.Insert(ans3.Length, "()");
+            while (i < ans3.Length)
+            {
+                if (ans3[i] == ' ')
+                {
+                    ans3 = ans3.Insert(i, "()");
                     i = i + 2;// добавили два элемента , чтобы в счете вернуться на прежнее место
                 }
 
@@ -44,23 +58,26 @@ namespace Level1Space
             //// объединяем оба случая
             string AnsTotal = ans1;
             AnsTotal = AnsTotal.Insert(AnsTotal.Length," ");
-            AnsTotal= AnsTotal = AnsTotal.Insert(AnsTotal.Length, ans2);
+            AnsTotal = AnsTotal = AnsTotal.Insert(AnsTotal.Length, ans3);
+            AnsTotal = AnsTotal.Insert(AnsTotal.Length, " ");
+            AnsTotal = AnsTotal = AnsTotal.Insert(AnsTotal.Length, ans2);
             // ans = ans.Insert(0, ans);
             return AnsTotal;
         }
 
-        //static void Main(string[] args)
-        //{
-        //    string t1 = BalancedParentheses(1);
-        //    Console.WriteLine(t1);
-        //    string t2 = BalancedParentheses(2);
-        //    Console.WriteLine(t2);
-        //    string t3 = BalancedParentheses(3);
-        //    Console.WriteLine(t3);
-        //    string t4 = BalancedParentheses(4);
-        //    Console.WriteLine(t4);
-        //    string t5 = BalancedParentheses(5);
-        //    Console.WriteLine(t5);
-        //}
+        static void Main(string[] args)
+        {
+            //string t1 = BalancedParentheses(1);
+            //Console.WriteLine(t1);
+            //string t2 = BalancedParentheses(2);
+            //Console.WriteLine(t2);
+            string t3 = BalancedParentheses(3);
+            Console.WriteLine(t3);
+
+            string t4 = BalancedParentheses(4);
+            Console.WriteLine(t4);
+            string t5 = BalancedParentheses(5);
+            Console.WriteLine(t5);
+        }
     }
 }
